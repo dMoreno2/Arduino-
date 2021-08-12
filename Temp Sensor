@@ -1,0 +1,62 @@
+// C++ code
+//
+#include <Servo.h>
+
+int var = 0;
+
+void setup()
+{
+ // pinMode(13, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB
+  }
+}
+
+void loop()
+{
+  var = analogRead(A0)/255;
+  
+  if(var > 30)
+  {
+    //red Hot
+    digitalWrite(5, HIGH);
+    digitalWrite(4, LOW);
+ 	digitalWrite(3, LOW);
+    Serial.println("HOT");
+  }
+  
+  if(var < 12.5)
+  {
+    //Blue cool?
+    digitalWrite(5, LOW);
+	digitalWrite(4, LOW);
+    digitalWrite(3, HIGH);
+    Serial.println("COLD");
+  }
+  
+  if(var > 12.5 && var < 30)
+  {
+    //green good	
+    digitalWrite(5, LOW);
+    digitalWrite(4, HIGH);
+    digitalWrite(3, LOW);
+
+    Serial.println("JUST RIGHT");
+  }
+  
+  Serial.println(var);
+  
+  delay(10); // Delay a little bit to improve simulation performance
+}
+
+
+/*
+	digitalWrite(5, LOW);
+	digitalWrite(4, LOW);
+ 	digitalWrite(3, LOW);
+*/
