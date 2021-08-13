@@ -1,0 +1,36 @@
+// C++ code
+//
+
+int LEDpin = 3;
+int BUTTONpin = 2;
+int level = 0;
+int val = 0;
+
+void setup()
+{
+  pinMode(BUTTONpin, INPUT); 
+  pinMode(LEDpin, OUTPUT);  
+
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  val = digitalRead(BUTTONpin);
+  Serial.println(val);
+  if(val== HIGH)
+  {
+    level += 50;
+    analogWrite(LEDpin, level);
+    Serial.println("ON");
+  }
+  else if(level >255)
+  {
+    level = 0;
+    analogWrite(LEDpin, level);
+    Serial.println("POWER RESET");
+  }
+  
+  delay(100); // Wait for 100 millisecond(s)
+}
