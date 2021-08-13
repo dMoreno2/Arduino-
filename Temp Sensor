@@ -2,7 +2,7 @@
 //
 #include <Servo.h>
 
-int var = 0;
+float var = 0;
 
 void setup()
 {
@@ -19,9 +19,9 @@ void setup()
 
 void loop()
 {
-  var = analogRead(A0)/255;
-  
-  if(var > 30)
+  var = -40 + 0.488155 * (analogRead(A0) - 20);
+  if (var > 30)
+      
   {
     //red Hot
     digitalWrite(5, HIGH);
